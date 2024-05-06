@@ -1,0 +1,2 @@
+INSERT INTO `ban_hang`.`role` (`id`, `name`) VALUES ('1', 'ADMIN'), ('2', 'USER'), ('3', 'STAFF');
+INSERT INTO `ban_hang`.`user` (`id`, `role_id`, `email`, `name`, `password`,`is_active`) VALUES ('1', '1', 'admin@gmail.com', 'admin', '$2a$12$0Tgk6utldir0JlP.F0t02eNuX7D81RaGH2S/j3T2bzW41aVA8w9hm',true),('2', '3', 'nv@gmail.com', 'Huan', '$2a$12$QH8RKPou0CaZdtwjrf9L7.1N9lEPaCGcmUTO5VUZRup0LGjmP.x9m',true);
