@@ -13,15 +13,17 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 @Configuration
 public class FilterConfig {
-
+	
 	private final JWTUtils jwtUtils;
+	
 	private final UserService userService;
 
 	@Bean
-	FilterRegistrationBean<JwtAuthenticationFilter> requestIdFilterRegistrationBean() {
+ 	FilterRegistrationBean<JwtAuthenticationFilter> requestIdFilterRegistrationBean() {
 		FilterRegistrationBean<JwtAuthenticationFilter> registrationBean = new FilterRegistrationBean<>();
 		registrationBean.setFilter(new JwtAuthenticationFilter(jwtUtils, userService));
 		registrationBean.addUrlPatterns("/*");
 		return registrationBean;
 	}
+	
 }

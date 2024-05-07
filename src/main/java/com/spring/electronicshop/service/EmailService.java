@@ -24,8 +24,6 @@ public class EmailService {
 	private final JavaMailSender javaMailSender;
 
 	private final TemplateEngine templateEngine;
-//	@Autowired
-//	ThymeleafService thymeleafService;
 
 	@Value("${spring.mail.username}")
 	private String email;
