@@ -1,7 +1,6 @@
 package com.spring.electronicshop.storage;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.MalformedURLException;
@@ -16,7 +15,6 @@ import java.util.stream.Stream;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
 import org.springframework.stereotype.Service;
@@ -30,8 +28,7 @@ import com.spring.electronicshop.exceptionhandler.StorageFileNotFoundException;
 public class StorageService {
 
 	private final Path rootLocation;
-	
-	@Autowired
+
 	private final Logger logger = LogManager.getLogger(StorageService.class);
 
 	public StorageService() {
@@ -43,7 +40,6 @@ public class StorageService {
 
 		this.rootLocation = Paths.get(properties.getLocation());
 	}
-	
 
 	public List<String> store(List<MultipartFile> files) {
 		List<String> filePaths = new ArrayList<>();
@@ -110,15 +106,16 @@ public class StorageService {
 	public void deleteAll() {
 		FileSystemUtils.deleteRecursively(rootLocation.toFile());
 	}
-	public void deleteFile(String fileName){
-		File filedelete =  new File(rootLocation.toFile(),fileName);
+
+	public void deleteFile(String fileName) {
+		File filedelete = new File(rootLocation.toFile(), fileName);
 		if (filedelete.exists()) {
-	        if (!filedelete.delete()) {
-	            throw new StorageException("Could not delete file: " + fileName);
-	        }else {
-	        	logger.info("Xóa thành công " + fileName);
+			if (!filedelete.delete()) {
+				throw new StorageException("Could not delete file: " + fileName);
+			} else {
+				logger.info("Xóa thành công " + fileName);
 			}
-	    } 
+		}
 	}
 
 	public void init() {
