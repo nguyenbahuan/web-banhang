@@ -239,13 +239,7 @@ public class ProductsService {
 					List<Images> listIgame = imagesRepository.findAllByProduct(opProduct.get().getId());
 					for (Images img : listIgame) {
 						imagesRepository.delete(img);
-						try {
-							storageService.deleteFile(img.getImageName());
-						} catch (FileNotFoundException e) {
-							reqRes.setMessage(e.getMessage());
-							reqRes.setStatusCode(0);
-							return reqRes;
-						}
+						storageService.deleteFile(img.getImageName());
 					}
 					List<Images> imagesNew = new ArrayList<>();
 					storageService.store(productReq.getImages()).forEach(img -> {
