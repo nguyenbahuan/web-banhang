@@ -36,30 +36,28 @@ public class SecurityConfig {
 	private final CustomAccessDeniedHandler accessDeniedHandler;
 
 	@Bean
-	public PasswordEncoder passwordEncoder() {
+	PasswordEncoder passwordEncoder() {
 		return new BCryptPasswordEncoder();
 	}
 
 	@Bean
-	public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+	SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 		http.cors(c -> c.disable()).csrf(AbstractHttpConfigurer::disable).authorizeHttpRequests((request) -> {
 			request.requestMatchers("/", "/home", "/register/**", "/login/**", "/home/", "/api/v1/login/**",
 					"api/v1/categories/**", "/refresh-token", "/api/v1/products/**", "/admin/login", "/admin/register",
 					"/files/**", "/admin/forgot-password", "/forgot-password/**", "/reset-password",
 					"api/v1/reviews/product/**", "/api/v1/slider/**").permitAll()
 					.requestMatchers("/api/v1/users/**", "/api/v1/admin/customer/**", "/api/v1/admin/discounts/**",
-							"/api/v1/admin/oders/**", "/api/v1/admin/products/**")
+							"/api/v1/admin/oders/**", "/api/v1/admin/products/**", "/api/v1/admin/slider/**",
+							"/api/v1/admin/reviews/**", "/api/v1/admin/categories/**", "/api/v1/admin/statistical/**")
 					.hasAnyAuthority("ADMIN", "STAFF")
-					.requestMatchers("/api/v1/admin/staff/get-all", "/api/v1/admin/staff/create",
-							"/api/v1/admin/roles/**", "/api/v1/admin/slider/**")
-					.hasAnyAuthority("ADMIN").requestMatchers("/api/v1/admin/staff/profile/**", "/api/v1/admin/show/**")
-					.hasAnyAuthority("ADMIN", "STAFF").anyRequest().authenticated();
+					.requestMatchers("/api/v1/admin/staff/**", "/api/v1/admin/roles/**").hasAnyAuthority("ADMIN")
+					.anyRequest().authenticated();
 
 		}).exceptionHandling(auth -> auth.authenticationEntryPoint(authenticationEntryPoint));
 		http.exceptionHandling(auth -> auth.accessDeniedHandler(accessDeniedHandler));
-		http.formLogin((request) -> {
-			request.disable();
-		}).sessionManagement(manager -> manager.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+		http.formLogin(request -> request.disable())
+				.sessionManagement(manager -> manager.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
 				.authenticationProvider(authenticationProvider())
 				.addFilterBefore(authenticationFilter, UsernamePasswordAuthenticationFilter.class).logout((request) -> {
 					request.disable();
