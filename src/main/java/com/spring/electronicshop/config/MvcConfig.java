@@ -64,7 +64,8 @@ public class MvcConfig implements WebMvcConfigurer {
 		CorsConfiguration config = new CorsConfiguration().applyPermitDefaultValues();
 		config.setAllowCredentials(true);
 
-		List<String> allowedOrigins = List.of("https://nguyenbahuan.github.io", "http://localhost:9000");
+		List<String> allowedOrigins = List.of("https://nguyenbahuan.github.io", "http://localhost:9000",
+				"https://shop-huannb.netlify.app");
 		config.setAllowedOrigins(allowedOrigins);
 
 		config.addAllowedMethod("*");
