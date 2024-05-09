@@ -65,7 +65,7 @@ public class MvcConfig implements WebMvcConfigurer {
 		config.setAllowCredentials(true);
 
 		List<String> allowedOrigins = List.of("https://nguyenbahuan.github.io", "http://localhost:9000",
-				"https://shop-huannb.netlify.app");
+				"http://localhost:3000", "https://shop-huannb.netlify.app", "https://shop-huannb-admin.netlify.app");
 		config.setAllowedOrigins(allowedOrigins);
 
 		config.addAllowedMethod("*");
