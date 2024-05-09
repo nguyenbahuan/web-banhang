@@ -49,7 +49,7 @@ public class ForgotPasswordController {
 		forgotPassword.setUsed(false);
 		forgotPasswordService.saveToken(forgotPassword);
 
-		String emailLink = "http://localhost:3000" + "/reset-password?token=" + forgotPassword.getToken() + "&email="
+		String emailLink = "https://shop-huannb.netlify.app" + "/reset-password?token=" + forgotPassword.getToken() + "&email="
 				+ email.getEmail();
 
 		message.setMessage("check your email");
