@@ -46,7 +46,7 @@ public class SecurityConfig {
 			request.requestMatchers("/", "/home", "/register/**", "/login/**", "/home/", "/api/v1/login/**",
 					"api/v1/categories/**", "/refresh-token", "/api/v1/products/**", "/admin/login", "/admin/register",
 					"/files/**", "/admin/forgot-password", "/forgot-password/**", "/reset-password",
-					"api/v1/reviews/**", "/api/v1/slider/**").permitAll()
+					"api/v1/reviews/**", "/api/v1/slider/**", "/swagger-ui/**").permitAll()
 					.requestMatchers("/api/v1/users/**", "/api/v1/admin/customer/**", "/api/v1/admin/discounts/**",
 							"/api/v1/admin/oders/**", "/api/v1/admin/products/**", "/api/v1/admin/slider/**",
 							"/api/v1/admin/reviews/**", "/api/v1/admin/categories/**", "/api/v1/admin/statistical/**")
